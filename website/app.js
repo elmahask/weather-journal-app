@@ -4,7 +4,8 @@ const query = '?q=';
 const andParameter = '&appid=';
 
 // Personal API Key for OpenWeatherMap API
-const apiKey = 'e3bb451720025bfdb44292e0318afb45';
+
+const apiKey = '7ef603b1997b14f781419c4e7a65e1a7';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
