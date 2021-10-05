@@ -4,35 +4,31 @@ const query = '?q=';
 const andParameter = '&appid=';
 
 // Personal API Key for OpenWeatherMap API
-
 const apiKey = '7ef603b1997b14f781419c4e7a65e1a7';
 
 // Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let date = new Date();
+let newDate = date.getMonth() + '.' + date.getDate() + '.' + date.getFullYear();
 
 // Event listener to add function to existing HTML DOM element
-const btn_generate = document.getElementById('generate');
-btn_generate.addEventListener('click', performAction);
+const generate = document.getElementById('generate');
+generate.addEventListener('click', performAction);
 
 /* Function called by event listener */
 function performAction(e) {
     e.preventDefault();
-    //get input from user
     const zipCode = document.getElementById('zip').value;
     const content = document.getElementById('feelings').value;
 
-    if (zipCode !== '') {
+    if (zipCode.size() !== '' && zipCode.length > 1 ) {
         getWeatherData(baseUrl, zipCode, apiKey)
             .then(function (data) {
-                // add data to POST request
                 postData('/addWeather', { temp: data.main.temp, date: newDate, content: content });
             }).then(function () {
-                // call updateUI to update html content
                 updateUI()
             }).catch(function (error) {
                 console.log(error);
-                alert('The zip code is invalid. Try again');
+                alert('The zip code is not correct. Plz Try again');
             });
     } else {
         alert("Plz insert correct zipcode");
@@ -41,10 +37,8 @@ function performAction(e) {
 
 /* Function to GET Web API Data*/
 const getWeatherData = async (baseUrl, zipCode, apiKey) => {
-    // res equals to the result of fetch function
     const res = await fetch(`${baseUrl}${query}${zipCode}${andParameter}${apiKey}`);
     try {
-        //assign the result of fetch function to data
         const data = await res.json();
         return data;
     } catch (error) {
@@ -80,13 +74,10 @@ const updateUI = async () => {
     try {
         const data = await request.json();
         console.log(data);
-        // update new entry values with the data
-        if (data.date !== undefined && data.temp !== undefined && data.content !== undefined) {
-            document.getElementById('date').innerHTML = 'Current Date : ' + data.date;
-            document.getElementById('temp').innerHTML = 'Temp Degree : ' + data.temp + ' K';
-            document.getElementById('content').innerHTML = data.content;
-        }
+        document.getElementById('date').innerHTML = 'Current Date : ' + data.date;
+        document.getElementById('temp').innerHTML = 'Temp Degree : ' + data.temp + ' K';
+        document.getElementById('content').innerHTML = data.content;
     } catch (error) {
-        console.log('error', error);
+        console.log(error);
     }
 };
