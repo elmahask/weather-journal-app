@@ -17,29 +17,22 @@ body{
 }
 
 .holder{
-    padding-left: 0px;
-    margin: 0px;
 }
 
 .entry{
     background: rgba(59, 74, 107, .4);
-    padding-left: 0px;
 }
 
 #entryHolder{
-    padding-left: 0px;
 }
 
 #date{
-    padding-left: 0px;
 }
 
 #temp{
-    padding-left: 0px;
 }
 
 #content{
-    padding-left: 0px;
 }
 
 .headline {
