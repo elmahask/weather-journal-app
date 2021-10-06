@@ -20,7 +20,7 @@ function performAction(e) {
     const zipCode = document.getElementById('zip').value;
     const content = document.getElementById('feelings').value;
 
-    if (zipCode.size() !== '' && zipCode.length > 1 ) {
+    if (zipCode !== '' && zipCode.length > 1 ) {
         getWeatherData(baseUrl, zipCode, apiKey)
             .then(function (data) {
                 postData('/addWeather', { temp: data.main.temp, date: newDate, content: content });
